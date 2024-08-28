@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/': 'http://localhost:8080', // Replace with your Express server's address
+      '/api/weather': 'http://localhost:8080', // Replace with your Express server's address
     },
   },
 })

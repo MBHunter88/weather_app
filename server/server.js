@@ -23,6 +23,19 @@ app.get('/', (req, res) => {
     console.log("Hello World!")
 })
 
+//create test route for openweather api
+app.get('/api/weather', async (req, res) => {
+    const city = req.query.city;
+    const apiKey = '52f7c2a9d5af1f603bad1757aea48d02'
+    const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
+    try {
+        const response = await fetch(apiUrl);
+        const data = await response.json();
+        res.json(data);
+    } catch { //include error catching
+        res.status(500).json({ error: 'Failed to fetch weather data' });
+    }
+});
 
 
 app.listen(PORT, () => console.log(`Server is runnning on port http://localhost:${PORT}`))
