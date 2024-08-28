@@ -22,6 +22,8 @@ function App() {
     fetchWeather(); // Fetch weather data when city changes
   }, [city]); //this useEffect runs whenever `city` changes
 
+ //handle user input 
+
  
   return (
     <>

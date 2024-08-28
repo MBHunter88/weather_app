@@ -1,12 +1,14 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
+import dotenv from "dotenv"
+
 
 //use .env for variables
-//dotenv.config();
+dotenv.config();
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 //config cors middleware
 app.use(cors());
@@ -26,7 +28,7 @@ app.get('/', (req, res) => {
 //create test route for openweather api
 app.get('/api/weather', async (req, res) => {
     const city = req.query.city;
-    const apiKey = '52f7c2a9d5af1f603bad1757aea48d02'
+    const apiKey = process.env.API_KEY;
     const apiUrl = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
     try {
         const response = await fetch(apiUrl);
