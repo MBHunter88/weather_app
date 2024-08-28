@@ -1,30 +1,32 @@
+//imports
 import { useState, useEffect } from 'react'
 import './App.css'
 
 
- 
+//define component 
 function App() {
-  const [city, setCity] = useState('Oakland'); //uses default city to render information
+  //initiate state
+  const [city, setCity] = useState('Oakley'); //renders data from the default state
   const [weatherData, setWeatherData] = useState(null);
-
+//fetch weather api 
     const fetchWeather = async () => {
       try {
         const response = await fetch(`/api/weather?city=${city}`); //fetch data from server.js
         const data = await response.json();
-        setWeatherData(data);
+        setWeatherData(data); //updates weatherData from parsed data api request
       } catch (error) {
         console.error('Error fetching weather data:', error);
       }
     };
 
- // useEffect to fetch data for default city on component mount
+ // useEffect to fetch data for default city when component initially loads
  useEffect(() => {
   fetchWeather(); // Fetch weather data for default city
 }, []); 
 
  //handle user input 
 const handleSubmit = (event) => {
-event.preventDefault()
+event.preventDefault() //prevents page from reloading
 fetchWeather();
 }
 
@@ -44,7 +46,7 @@ fetchWeather();
    {weatherData ? (
         <div>
           <h3>Weather in {weatherData.name}</h3>
-          <p>Temperature: {weatherData.main.temp}°C</p>
+          <p>Temperature: {weatherData.main.temp}°F</p>
           <p>Humidity: {weatherData.main.humidity}%</p>
           <p>Wind Speed: {weatherData.wind.speed} m/s</p>
         </div>
