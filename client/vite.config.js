@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
-      '/': 'http://localhost:5000', // Replace with your Express server's address
+      '/': 'http://localhost:8080', // Replace with your Express server's address
     },
   },
 })
