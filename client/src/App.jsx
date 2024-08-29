@@ -64,12 +64,13 @@ fetchWeather(); //fetch data from user input
         type="text"
         onChange={(e) => setCity(e.target.value)}
         placeholder='Enter city here'
+        autoFocus
         />
      <button type="submit">Get Weather</button>
       </form>
     </div>
 
-    {error && <p style={{ color: 'red' }}>{error}</p>}
+    {error && <p className='error-msg'>{error}</p>}
 
    {weatherData ? (
         <div className='weatherData'>
