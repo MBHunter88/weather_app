@@ -34,11 +34,11 @@ fetchWeather();
 
   return (
     <>
-    <div>
+    <div className='container'>
+    <div className='form'>
       <form onSubmit={handleSubmit}>
         <input
         type="text"
-        value={city}
         onChange={(e) => setCity(e.target.value)}
         placeholder='Enter city here'
         />
@@ -46,18 +46,23 @@ fetchWeather();
       </form>
     </div>
    {weatherData ? (
-        <div>
+        <div className='weatherData'>
+           <div className='weatherDisplay'>
           <h3>Weather in {weatherData.name}</h3>
            <img
             src={`http://openweathermap.org/img/wn/${weatherData.weather[0].icon}@2x.png`}
           />
+         
           <p>Temperature: {weatherData.main.temp}°F</p>
           <p>Humidity: {weatherData.main.humidity}%</p>
           <p>Wind Speed: {weatherData.wind.speed} m/s</p>
+          </div>
         </div>
+      
       ) : (
         <p>Loading...</p>
       )}
+        </div>
     </>
   )
 }

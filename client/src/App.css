@@ -1,6 +1,100 @@
-#root {
-  max-width: 1280px;
+/* General styles */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f8ff;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Container for the entire app */
+.container {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Form styles */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+  margin: 0 auto;
+  max-width: fit-content;
+  padding-top: 10px;;
+}
+
+input[type="text"] {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+button {
+  padding: 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-left: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+
+/* weather display styles */
+.weatherDisplay {
   text-align: center;
 }
+
+.weatherDisplay h3 {
+  margin: 0 0 10px;
+  font-size: 24px;
+  margin-top: 20px;;
+}
+
+.weatherDisplay p {
+  margin: 5px 0;
+  font-size: 18px;
+}
+
+.weatherDisplay img {
+  margin-top: 10px;
+ 
+}
+
+/* Media Queries */
+
+/* Tablet view: 768px and below */
+@media (max-width: 768px) {
+  .container {
+    max-width: 90%; 
+  }
+
+  .weatherDisplay h3 {
+    font-size: 20px;
+  }
+
+  .weatherDisplay p {
+    font-size: 16px; 
+  }
+
+  button {
+    font-size: 14px; 
+  }
+}
+
