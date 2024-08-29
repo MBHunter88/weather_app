@@ -27,7 +27,7 @@ The Weather App allows users to search for the current weather information of an
 ## Demo
 
 ![Weather App Screenshot](client/src/assets/weather-app-screenshot.png)
-![Weather App Demo](<iframe src="https://giphy.com/embed/w8P9MeMD0jQ1LExo5I" width="480" height="480" style="" frameBorder="0" class="giphy-embed" allowFullScreen></iframe><p><a href="https://giphy.com/gifs/w8P9MeMD0jQ1LExo5I">via GIPHY</a></p>)
+![Weather App Demo](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExajExeGJ3Y2Nhc2N2OGgxMmwzZ3RnOTh6eG10MndyNjRyY2pseDJvcSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/w8P9MeMD0jQ1LExo5I/giphy.gif)
 
 ## Installation
 
@@ -41,44 +41,60 @@ Follow these steps to set up the project locally.
 
 1. Clone the repository:
 
+  ```bash
+   git clone git@github.com:MBHunter88/-techtonica-assignments.git
+   
+   cd weather-app/server
+   ```
 
 2. Install the backend dependencies:
 
- ```npm install```
+ ```bash
+ npm install
+ ```
 
 3. Create a .env file in the /server directory and add your OpenWeatherMap API key:
 
-```
+```bash
 API_KEY=your_openweathermap_api_key
 PORT=8080
 ```
 
 4. Start the backend server:
 
-```npm start```
+```bash
+npm start
+```
 
 ### Frontend Setup
 
 1. Navigate to the frontend directory:
 
-```cd ../client```
+```bash
+cd ../client
+```
 
 2. Install the frontend dependencies:
 
 
-```npm install```
+```bash
+npm install
+```
 
 3. Start the React development server:
 
 
-```npm run dev```
+```bash
+npm run dev
+```
 
 4. Open your browser and go to local host.
 
 ## Usage
 
-Search for a City: Enter a city name in the input field and click "Get Weather" to view the current weather information for that city.
-Default City: The app loads with weather data for "Oakley" as the default city on startup.
+1. Search for a City: Enter a city name in the input field and click "Get Weather" to view the current weather information for that city.
+2. Default City: The app loads with weather data for "Oakley" as the default city on startup.
+
 
 ## Technologies Used
 Frontend:
@@ -92,6 +108,8 @@ Backend:
 - Node.js
 - Express.js
 - dotenv for environment variables
+- cors
+- body-parser
 
 API:
 
