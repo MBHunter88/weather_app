@@ -98,3 +98,33 @@ button:hover {
   }
 }
 
+/* Mobile view: 480px and below */
+@media (max-width: 480px) {
+  .container {
+    padding: 15px; 
+    max-width: 95%;
+  }
+
+  form {
+    gap: 5px; 
+  }
+
+  input[type="text"] {
+    padding: 8px;
+    font-size: 14px; 
+  }
+
+  button {
+    padding: 8px; 
+    font-size: 14px; 
+  }
+
+  .weatherDisplay h3 {
+    font-size: 18px;
+  }
+
+  .weatherDisplay p {
+    font-size: 14px; 
+  }
+
+}
