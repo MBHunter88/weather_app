@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Form from './Form';
 
-
-const Users = ({ fetchWeather, setCity, searchedCity }) => {
+const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInUser, setFavoriteCity }) => {
   //state management
   const [searchInput, setSearchInput] = useState(''); 
   const [searchResults, setSearchResults] = useState([]); 
-  const [loggedInUser, setLoggedInUser] = useState(null); 
-  const [favoriteCity, setFavoriteCity] = useState(''); 
-
+  
   // Function to search for users (login by username)
   const searchUsers = async (e) => {
     e.preventDefault();
@@ -42,77 +40,28 @@ const Users = ({ fetchWeather, setCity, searchedCity }) => {
     }
   };
 
-  //save the searched city as a favorite for the logged-in user
-  const handleFavorite = async () => {
-    if (!loggedInUser) {
-      console.error('No user logged in!');
-      return;
-    }
-    try {
-      const response = await fetch(`http://localhost:8080/api/favorite-city/${loggedInUser.id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          cityName: searchedCity, 
-        }),
-      });
-
-      if (response.ok) {
-        console.log('City saved as favorite');
-        setFavoriteCity(searchedCity); 
-      } else {
-        console.log('Failed to save favorite city');
-      }
-    } catch (error) {
-      console.error('Error saving favorite city:', error);
-    }
-  };
-
+  
   return (
     <div>
       {!loggedInUser ? (
-        <form className="login-form" onSubmit={searchUsers}>
-          <input
-            name="username"
-            type="text"
-            placeholder="Enter username to login"
-            value={searchInput}
-            onChange={(e) => setSearchInput(e.target.value)}
-          />
-          <button type="submit">Login</button>
-        </form>
+           <Form
+        value={searchInput}
+        onChange={(e) => setSearchInput(e.target.value)}
+        onSubmit={searchUsers}
+        placeholder="Enter username to login"
+        buttonText="Login"
+      />
       ) : (
         <>
           <p>Logged in as: {loggedInUser.username}</p>
-          <p>Favorite City: {favoriteCity}</p> 
-
-          <form className="city-search-form" onSubmit={(e) => {
-            e.preventDefault();
-            setCity(searchInput); 
-            fetchWeather(searchInput);
-          }}>
-            <input
-              name="city"
-              type="text"
-              placeholder="Enter city"
-              value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
-            />
-            <button type="submit">Get Weather</button>
-          </form>
-          <button onClick={handleFavorite}>
-            Save {searchedCity} as Favorite
-          </button>
         </>
       )}
+
       {searchResults.length > 0 && !loggedInUser && (
         <ul>
           {searchResults.map((user) => (
             <li key={user.id}>
-              <p>Username: {user.username}</p>
-              <button onClick={() => handleLogin(user)}>Login as {user.username}</button>
+              <button onClick={() => handleLogin(user)}>Log in as {user.username}</button>
             </li>
           ))}
         </ul>
