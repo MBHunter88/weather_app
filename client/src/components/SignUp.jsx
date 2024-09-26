@@ -1,9 +1,11 @@
 import React, {useState} from 'react';
 
 
-const SignUp = ({ searchedCity, loggedInUser, handleFavorite }) => {
+const SignUp = ({ fetchWeather, loggedInUser, setLoggedInUser }) => {
   if (loggedInUser) return null;
   const [signInInput, setSignInInput] = useState({ username: '', city: '' });
+    const [isSignedUp, setIsSignedUp] = useState(false);
+    const [displayedUsername, setDisplayedUsername] = useState('');
 
  // handler for adding a new user
  const addUser = async (event) => {
@@ -22,8 +24,11 @@ const SignUp = ({ searchedCity, loggedInUser, handleFavorite }) => {
 
       if (response.ok) {
         const newUser = await response.json();
+        setDisplayedUsername(newUser.username);
         setSignInInput({ username: '', city: '' }); 
-         
+        setIsSignedUp(true);
+        fetchWeather(newUser.city);
+        setLoggedInUser(newUser);
       }
     } catch (error) {
       console.error('Error adding individual:', error);
@@ -37,6 +42,11 @@ const SignUp = ({ searchedCity, loggedInUser, handleFavorite }) => {
     });
   };
 
+   // Conditionally render the form or a success message
+   if (isSignedUp) {
+    return <p>Sign up successful! Welcome, {displayedUsername}!</p>;
+    
+  }
   
   return (
     <form onSubmit={addUser}>

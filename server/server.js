@@ -133,8 +133,9 @@ app.put(`/api/favorite-city/:userId`, async (req, res) => {
       const newFavorite = favoriteResult.rows[0];
       //get response for both
       res.status(201).json({
-        user: newUser,
-        favorite: newFavorite
+        id: newUser.id,
+        username: newUser.username,
+        city,
       });
 
     } catch (error) {

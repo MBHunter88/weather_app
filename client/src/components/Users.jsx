@@ -22,6 +22,7 @@ const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInU
   const handleLogin = async (user) => {
     setLoggedInUser(user); 
     setSearchInput(''); // clear input field for city search
+    setSearchResults([]);
     console.log(`Logged in as: ${user.username}`);
 
     // Fetch the user's favorite city from the backend

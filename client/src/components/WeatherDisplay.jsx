@@ -3,20 +3,24 @@ import React, { useState, useEffect } from 'react'
 import Users from './Users';
 import FavoriteButton from './FavoriteButton';
 import Form from './Form';
-
+import SignUp from './SignUp';
 
 
 
 //define component 
 function WeatherDisplay() {
   //initiate state
-  const [city, setCity] = useState('Oakley'); //renders data from the default state
+  const [city, setCity] = useState(''); 
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null); //add state for error handling
   const [loading, setLoading] = useState(false) //state for loading indication
   const [searchedCity, setSearchedCity] = useState('');
   const [loggedInUser, setLoggedInUser] = useState(null); // Store logged-in user
   const [favoriteCity, setFavoriteCity] = useState('');
+  const [isFavorite, setIsFavorite] = useState(false)
+
+
+
 
   //fetch weather api 
   const fetchWeather = async (selectedCity = city) => {
@@ -54,13 +58,10 @@ function WeatherDisplay() {
       setWeatherData(null) //clears data on error
     } finally {
       setLoading(false) //stop loading indicator
+      setCity('')
     }
   };
 
-  // useEffect to fetch data for default city when component initially loads
-  useEffect(() => {
-    fetchWeather(); // Fetch weather data for default city
-  }, []);
 
 
   //save the searched city as a favorite for the logged-in user
@@ -82,6 +83,7 @@ function WeatherDisplay() {
 
       if (response.ok) {
         console.log('City saved as favorite');
+        setIsFavorite(true)
         setFavoriteCity(searchedCity); 
       } else {
         console.log('Failed to save favorite city');
@@ -90,6 +92,8 @@ function WeatherDisplay() {
       console.error('Error saving favorite city:', error);
     }
   };
+
+  
 
 
   //handle user input 
@@ -100,7 +104,12 @@ function WeatherDisplay() {
 
   return (
     <>
-    
+    <SignUp loggedInUser={loggedInUser}
+    searchedCity={searchedCity}
+    handleFavorite={handleFavorite}
+    setLoggedInUser={setLoggedInUser}
+    fetchWeather={fetchWeather}
+    />
   
     <Users 
     weatherData={weatherData} 
@@ -133,6 +142,8 @@ function WeatherDisplay() {
                 searchedCity={searchedCity}
                 loggedInUser={loggedInUser}
                 handleFavorite={handleFavorite}
+                isFavorite={isFavorite}
+                favoriteCity={favoriteCity}
               />
             </div>
           </div>
