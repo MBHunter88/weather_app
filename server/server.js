@@ -57,9 +57,19 @@ app.get('/search', async (req, res) => {
         const searchQuery = `SELECT users.id, users.username, favorites.city FROM users LEFT JOIN favorites ON users.id = favorites.user_id WHERE username LIKE $1`
         const searchInput = `%${input}%`
         const result = await db.query(searchQuery, [searchInput]);
+
+        if (result.rows.length === 0){
+            return res.status(404).json({ error: 'User not found' });
+        }
+
         res.json(result.rows)
+
+       
     } catch (e) {
-        return res.status(404).json({error: 'Contact not found'})
+        res.status(500).send({error: 'Error fetching user data',
+            message: e.message,
+            operation: 'GET /search'
+          });
     }
 })
 
@@ -70,7 +80,10 @@ app.put(`/api/favorite-city/:userId`, async (req, res) => {
       await db.query('UPDATE favorites SET city = $1 WHERE user_id = $2', [cityName, userId]);
       res.status(200).send('Favorite city updated');
     } catch (err) {
-      res.status(500).send('Error updating favorite city');
+        res.status(500).send({error: 'Error updating favorite city',
+            message: e.message,
+            operation: 'PUT /api/favorite-city/:userId'
+          });
     }
   });
 
@@ -84,13 +97,54 @@ app.put(`/api/favorite-city/:userId`, async (req, res) => {
       } else {
         res.json({ city: null });
       }
-    } catch (err) {
-      console.error('Error fetching favorite city:', err);
-      res.status(500).send('Error fetching favorite city');
+    } catch (error) {
+      console.error('Error fetching favorite city:', error);
+      res.status(500).send({error: 'Error fetching favorite city',
+        message: e.message,
+        operation: 'GET /api/favorite-city/:userId'
+      });
     }
   });
   
+
+  //post request to add new user
+  app.post('/api/users', async (req, res) => {
+    const { username, city } = req.body;
   
+    //validation
+    if (!username || !city) {
+      return res.status(400).json({ error: 'Username and city are required' });
+    }
+  
+    try {
+        //insert in uesr table
+      const result = await db.query(
+        'INSERT INTO users (username) VALUES ($1 ) RETURNING id, username',
+        [username]
+      );
+      const newUser = result.rows[0];
+    
+    //insert in favorite table using newUser id
+      const favoriteResult = await db.query(
+        'INSERT INTO favorites (user_id, city) VALUES ($1, $2) RETURNING id, city',
+        [newUser.id, city]
+      );
+  
+      const newFavorite = favoriteResult.rows[0];
+      //get response for both
+      res.status(201).json({
+        user: newUser,
+        favorite: newFavorite
+      });
+
+    } catch (error) {
+      console.error('Error inserting new user:', error);
+      res.status(500).json({ error: 'Failed to create user',
+        message: e.message,
+        operation: 'POST /api/users'
+       });
+    }
+  });
 
 
 app.listen(PORT, () => console.log(`Server is runnning on port http://localhost:${PORT}`))
