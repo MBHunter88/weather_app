@@ -7,6 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api/weather': 'http://localhost:8080', // Replace with your Express server's address
+   '/search': 'http://localhost:8080', 
     },
   },
 })

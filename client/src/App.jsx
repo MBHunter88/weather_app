@@ -1,6 +1,8 @@
 //imports
 import { useState, useEffect } from 'react'
+import Users from './components/Users';
 import './App.css'
+
 
 
 //define component 
@@ -10,12 +12,13 @@ function App() {
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null); //add state for error handling
   const [loading, setLoading] = useState(false) //state for loading indication
+  const [searchedCity, setSearchedCity] = useState('');
 
   //fetch weather api 
-  const fetchWeather = async () => {
-
+  const fetchWeather = async (selectedCity = city) => {
+ setSearchedCity(selectedCity);
     //error handling for user input 
-    if (!city.trim()) {
+    if (!selectedCity.trim()) {
       setError('Please enter city name') //error for empty input
       setWeatherData(null) //clear weather data
       return
@@ -24,7 +27,7 @@ function App() {
     setError(null); // clear any previous errors
 
     try {
-      const response = await fetch(`/api/weather?city=${city}`); //fetch data from server.js
+      const response = await fetch(`/api/weather?city=${selectedCity}`); //fetch data from server.js
 
       //error handling to check for response from server
       if (!response.ok) { //if not ok (codes 200-299) throw error
@@ -63,6 +66,13 @@ function App() {
 
   return (
     <>
+    <Users 
+    weatherData={weatherData} 
+    setWeatherData={setWeatherData} 
+    setCity={setCity} 
+    fetchWeather={fetchWeather} 
+    searchedCity={searchedCity}/>
+    
       <div className='container'>
         <div className='form'>
           <form onSubmit={handleSubmit}>
@@ -75,6 +85,7 @@ function App() {
             <button type="submit">Get Weather</button>
           </form>
         </div>
+      
 
         {error && <p className='error-msg'>{error}</p>}
         {loading && <p>Loading...</p>}
