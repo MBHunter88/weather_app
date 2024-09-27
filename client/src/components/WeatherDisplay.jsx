@@ -71,7 +71,7 @@ function WeatherDisplay() {
       return;
     }
     try {
-      const response = await fetch(`http://localhost:8080/api/favorite-city/${loggedInUser.id}`, {
+      const response = await fetch(`http://localhost:8080/favorite-city/${loggedInUser.id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

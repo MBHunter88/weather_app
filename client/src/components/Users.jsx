@@ -10,9 +10,12 @@ const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInU
   const searchUsers = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8080/search?input=${searchInput}`);
+      const response = await fetch(`http://localhost:8080/users/login?input=${searchInput}`);
       const data = await response.json();
       setSearchResults(data);
+      if(data.length === 1){
+        await handleLogin(data[0]);
+      }
     } catch (e) {
       console.error('Error fetching user search results:', e);
     }
@@ -27,7 +30,7 @@ const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInU
 
     // Fetch the user's favorite city from the backend
     try {
-      const response = await fetch(`http://localhost:8080/api/favorite-city/${user.id}`);
+      const response = await fetch(`http://localhost:8080/favorite-city/${user.id}`);
       const data = await response.json();
       if (data.city) {
         setFavoriteCity(data.city); 
@@ -58,15 +61,8 @@ const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInU
         </>
       )}
 
-      {searchResults.length > 0 && !loggedInUser && (
-        <ul>
-          {searchResults.map((user) => (
-            <li key={user.id}>
-              <button onClick={() => handleLogin(user)}>Log in as {user.username}</button>
-            </li>
-          ))}
-        </ul>
-      )}
+      {searchResults}
+      
     </div>
   );
 };

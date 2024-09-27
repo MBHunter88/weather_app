@@ -11,7 +11,7 @@ const SignUp = ({ fetchWeather, loggedInUser, setLoggedInUser }) => {
  const addUser = async (event) => {
     event.preventDefault();
     try {
-      const response = await fetch(`http://localhost:8080/api/users`, {
+      const response = await fetch(`http://localhost:8080/users/sign-up`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
