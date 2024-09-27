@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Form from './Form';
 
-const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInUser, setFavoriteCity }) => {
+const Users = ({ fetchWeather, setCity, setWeatherData, loggedInUser, setLoggedInUser, setFavoriteCity }) => {
   //state management
   const [searchInput, setSearchInput] = useState(''); 
   const [searchResults, setSearchResults] = useState([]); 
@@ -44,6 +44,14 @@ const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInU
     }
   };
 
+  const handleLogOut = () => {
+    setLoggedInUser(null);
+   setCity('');
+   setFavoriteCity('');
+   setWeatherData(null);
+   console.log('User logged out successfully');
+  }
+
   
   return (
     <div>
@@ -58,11 +66,12 @@ const Users = ({ fetchWeather, setCity, searchedCity, loggedInUser, setLoggedInU
       ) : (
         <>
           <p>Logged in as: {loggedInUser.username}</p>
+          <button className="logout-btn" onClick={handleLogOut}>Log Out</button>
         </>
       )}
 
       {searchResults}
-      
+
     </div>
   );
 };

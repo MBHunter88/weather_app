@@ -1,44 +1,34 @@
 /* General styles */
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f0f8ff;
+  font-family: 'Roboto', Arial, sans-serif;
+  background-color: #c2e3ff;
   margin: 0 auto;
   padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
+  color: #333;
 }
 
-
+h1, h2, h3 {
+  font-weight: 600;
+}
 
 /* Container for the entire app */
 .container {
-  background-color: #ffffff;
+  background-color: #325488;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
   width: 100%;
   margin: 0 auto;
+  transition: box-shadow 0.3s ease;
 }
 
-/* Form styles */
-.form {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 20px;
-  margin: 0 auto;
-  max-width: fit-content;
-  padding-top: 10px;;
-}
-
-input[type="text"] {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+.container:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 button {
@@ -46,37 +36,111 @@ button {
   background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 4px;
+  border-radius: 6px;
   font-size: 16px;
   margin-left: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 button:hover {
   background-color: #0056b3;
+  transform: translateY(-2px);
 }
 
+.search-form {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #325488;
+  border-radius: 12px;
+  /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
+}
 
-/* weather display styles */
+.user-signup, .user-login {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  padding: 20px;
+  background-color: #c2e3ff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
+}
+
+.user-signup:hover, .user-login:hover {
+  background-color: #b0d9fe;
+}
+
+/* Input form styling */
+input[type="text"], input[type="submit"], button[type="submit"] {
+  padding: 12px;
+  font-size: 16px;
+  border: 1px solid #cccccc;
+  border-radius: 6px;
+  max-width: 80%;
+  margin-bottom: 10px;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+button[type="submit"], input[type="submit"] {
+  background-color: #0a2e52;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button[type="submit"]:hover, input[type="submit"]:hover {
+  background-color: #15508b;
+  transform: translateY(-2px);
+}
+
+/* Weather display styles */
 .weatherDisplay {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.weatherDisplay:hover {
+  transform: scale(1.03);
 }
 
 .weatherDisplay h3 {
-  margin: 0 0 10px;
   font-size: 24px;
-  margin-top: 20px;;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .weatherDisplay p {
-  margin: 5px 0;
+  margin: 8px 0;
   font-size: 18px;
+  color: #555;
 }
 
 .weatherDisplay img {
   margin-top: 10px;
- 
+  max-width: 100px;
+  transition: transform 0.2s ease;
+}
+
+.weatherDisplay img:hover {
+  transform: rotate(5deg) scale(1.05);
 }
 
 .error-msg {
@@ -84,11 +148,25 @@ button:hover {
   animation: fade-in 0.5s ease-in-out;
 }
 
+/* Loading spinner */
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
 }
-
 
 /* Media Queries */
 

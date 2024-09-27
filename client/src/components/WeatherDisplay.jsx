@@ -10,7 +10,7 @@ import SignUp from './SignUp';
 //define component 
 function WeatherDisplay() {
   //initiate state
-  const [city, setCity] = useState(''); 
+  const [city, setCity] = useState('banana'); 
   const [weatherData, setWeatherData] = useState(null);
   const [error, setError] = useState(null); //add state for error handling
   const [loading, setLoading] = useState(false) //state for loading indication
@@ -93,7 +93,10 @@ function WeatherDisplay() {
     }
   };
 
-  
+    // useEffect to fetch data for default city when component initially loads
+    useEffect(() => {
+        fetchWeather(); // Fetch weather data for default city
+      }, []);
 
 
   //handle user input 
@@ -104,13 +107,17 @@ function WeatherDisplay() {
 
   return (
     <>
+    <div className='container'>
+    <div className='user-signup'>
     <SignUp loggedInUser={loggedInUser}
     searchedCity={searchedCity}
     handleFavorite={handleFavorite}
     setLoggedInUser={setLoggedInUser}
     fetchWeather={fetchWeather}
+    setWeatherData={setWeatherData}
     />
-  
+  </div>
+  <div className='user-login'>
     <Users 
     weatherData={weatherData} 
     setWeatherData={setWeatherData} 
@@ -119,11 +126,14 @@ function WeatherDisplay() {
     setLoggedInUser={setLoggedInUser} 
     setFavoriteCity={setFavoriteCity}
     fetchWeather={fetchWeather} 
-    searchedCity={searchedCity}/><br/>
- <div className='container'>
+    searchedCity={searchedCity}/>
+    </div>
+    <br/>
+
+ 
    
         {error && <p className='error-msg'>{error}</p>}
-        {loading && <p>Loading...</p>}
+        {loading && <p className='loading-spinner'>Loading...</p>}
 
         {weatherData && (
           <div className='weatherData'>
@@ -150,6 +160,7 @@ function WeatherDisplay() {
 
         )}
         <br/>
+        <div className='search-form'>
  <Form
         value={city}
         onChange={(e) => setCity(e.target.value)}
@@ -157,7 +168,7 @@ function WeatherDisplay() {
         placeholder="Enter city to get weather"
         buttonText="Get Weather"
       />
-        
+        </div>
       </div>
     </>
   )

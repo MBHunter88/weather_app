@@ -49,6 +49,7 @@ const SignUp = ({ fetchWeather, loggedInUser, setLoggedInUser }) => {
   }
   
   return (
+    <div className='sign-up'>
     <form onSubmit={addUser}>
     <input
       type="text"
@@ -68,6 +69,7 @@ const SignUp = ({ fetchWeather, loggedInUser, setLoggedInUser }) => {
     />
     <button type="submit">Sign Up</button>
   </form>
+  </div>
   );
 };
 
