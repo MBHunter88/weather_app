@@ -60,14 +60,14 @@ const Users = ({ fetchWeather, setCity, setWeatherData, loggedInUser, setLoggedI
         value={searchInput}
         onChange={(e) => setSearchInput(e.target.value)}
         onSubmit={searchUsers}
-        placeholder="Enter username to login"
+        placeholder="Username"
         buttonText="Login"
       />
       ) : (
-        <>
-          <p>Logged in as: {loggedInUser.username}</p>
+        <div classname='welcome-msg' style={{textAlign: 'center'}}>
+          <h2 >Welcome {loggedInUser.username}!</h2>
           <button className="logout-btn" onClick={handleLogOut}>Log Out</button>
-        </>
+        </div>
       )}
 
       {searchResults}

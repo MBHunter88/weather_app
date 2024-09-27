@@ -1,7 +1,12 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Rammetto+One&display=swap');
 /* General styles */
 body {
   font-family: 'Roboto', Arial, sans-serif;
-  background-color: #c2e3ff;
+  background-image: url('/banana-pattern.jpg');
+  background-size: cover;
+  background-position: center;
+  /* background-color: #c2e3ff; */
   margin: 0 auto;
   padding: 0;
   display: flex;
@@ -11,17 +16,39 @@ body {
   color: #333;
 }
 
+.rammetto-one-regular {
+  font-family: "Rammetto One", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+.title{
+  font-family: "Rammetto One", sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-left: 28px;
+  text-align: center;
+ background-color: rgb(0, 176, 213);
+ padding: 20px;
+ border-radius: 6px;
+}
+
+
 h1, h2, h3 {
   font-weight: 600;
 }
 
+
+
 /* Container for the entire app */
 .container {
-  background-color: #325488;
+  background-color:  rgb(47, 30, 30);
   padding: 20px;
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   max-width: 600px;
+  min-width: 50%;
   width: 100%;
   margin: 0 auto;
   transition: box-shadow 0.3s ease;
@@ -33,7 +60,7 @@ h1, h2, h3 {
 
 button {
   padding: 10px;
-  background-color: #007bff;
+  background-color: #415264;
   color: white;
   border: none;
   border-radius: 6px;
@@ -54,7 +81,7 @@ button:hover {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #325488;
+  background-color: rgb(47, 30, 30);/* #325488; */
   border-radius: 12px;
   /* box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1); */
 }
@@ -63,15 +90,15 @@ button:hover {
   margin-top: 20px;
   margin-bottom: 20px;
   padding: 20px;
-  background-color: #c2e3ff;
+  background-color: rgb(0, 176, 213);/*#c2e3ff*/
   border-radius: 12px;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
   transition: background-color 0.3s ease;
 }
 
-.user-signup:hover, .user-login:hover {
+/* .user-signup:hover, .user-login:hover {
   background-color: #b0d9fe;
-}
+} */
 
 /* Input form styling */
 input[type="text"], input[type="submit"], button[type="submit"] {
@@ -91,8 +118,8 @@ input[type="text"]:focus {
 }
 
 button[type="submit"], input[type="submit"] {
-  background-color: #0a2e52;
-  color: white;
+  background-color: rgb(238, 193, 93); /*#0a2e52;*/
+  color: black;
   padding: 12px 24px;
   border: none;
   border-radius: 6px;
@@ -102,7 +129,7 @@ button[type="submit"], input[type="submit"] {
 }
 
 button[type="submit"]:hover, input[type="submit"]:hover {
-  background-color: #15508b;
+  background-color: rgb(208, 164, 70);;
   transform: translateY(-2px);
 }
 

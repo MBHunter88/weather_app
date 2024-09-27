@@ -18,7 +18,7 @@ function WeatherDisplay() {
   const [loggedInUser, setLoggedInUser] = useState(null); // Store logged-in user
   const [favoriteCity, setFavoriteCity] = useState('');
   const [isFavorite, setIsFavorite] = useState(false)
-
+  
 
 
 
@@ -62,8 +62,7 @@ function WeatherDisplay() {
     }
   };
 
-
-
+  
   //save the searched city as a favorite for the logged-in user
   const handleFavorite = async () => {
     if (!loggedInUser) {
@@ -127,14 +126,14 @@ function WeatherDisplay() {
     setFavoriteCity={setFavoriteCity}
     fetchWeather={fetchWeather} 
     searchedCity={searchedCity}/>
-    </div>
+    </div >
     <br/>
 
  
    
         {error && <p className='error-msg'>{error}</p>}
         {loading && <p className='loading-spinner'>Loading...</p>}
-
+<div >
         {weatherData && (
           <div className='weatherData'>
             <div className='weatherDisplay'>
@@ -147,7 +146,7 @@ function WeatherDisplay() {
               <p>Temperature: {weatherData.main.temp}°F</p>
               <p>Humidity: {weatherData.main.humidity}%</p>
               <p>Wind Speed: {weatherData.wind.speed} m/s</p>
-          
+            <p>Description: {weatherData.weather[0].description}</p>
               <FavoriteButton
                 searchedCity={searchedCity}
                 loggedInUser={loggedInUser}
@@ -168,6 +167,7 @@ function WeatherDisplay() {
         placeholder="Enter city to get weather"
         buttonText="Get Weather"
       />
+        </div>
         </div>
       </div>
     </>

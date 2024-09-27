@@ -56,7 +56,7 @@ const SignUp = ({ fetchWeather, loggedInUser, setLoggedInUser }) => {
       name="username"
       value={signInInput.username}
       onChange={handleChange}
-      placeholder="Enter username"
+      placeholder="Create username"
       required
     />
     <input
