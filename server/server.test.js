@@ -59,9 +59,10 @@ describe('GET /api/weather', () => {
   });
   it('should return status 200 and a list of items', async () => {
     const response = await request(app).get('/api/weather');
-    //console.log('Actual Response:', JSON.stringify(response.body));
+    console.log('Actual Response:', JSON.stringify(response.body));
     expect(response.statusCode).toBe(200);
-    expect(response.body).toEqual(expect.arrayContaining([/* expected items */]));
+    expect(response.body.weather[0].main).toBe("Drizzle");
+    expect(response.body.main.temp).toBe(280.32);
     expect(fetch).toHaveBeenCalledTimes(1)
     });
   });
